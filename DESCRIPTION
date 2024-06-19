@@ -1,6 +1,6 @@
 Package: ggtibble
 Title: Create Tibbles and Lists of 'ggplot' Figures for Reporting
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person("Bill", "Denney", email="wdenney@humanpredictions.com", role=c("aut", "cre"), comment=c(ORCID="0000-0002-5759-428X"))
 Description: 
@@ -20,8 +20,8 @@ URL: https://billdenney.github.io/ggtibble/
 Language: en-US
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2024-02-06 17:31:31 UTC; wdenn
+Packaged: 2024-06-19 12:19:38 UTC; bill
 Author: Bill Denney [aut, cre] (<https://orcid.org/0000-0002-5759-428X>)
 Maintainer: Bill Denney <wdenney@humanpredictions.com>
 Repository: CRAN
-Date/Publication: 2024-02-07 18:10:02 UTC
+Date/Publication: 2024-06-19 12:50:02 UTC

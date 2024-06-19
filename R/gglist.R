@@ -18,6 +18,14 @@ gglist <- function(data = NULL, mapping = ggplot2::aes(), ..., environment = par
   )
 }
 
+#' Create a new `gglist` object
+#'
+#' @param x A list of ggplot2 objects to convert into a gglist
+#' @returns The list verified to be a gglist and with the gglist class
+#' @family New ggtibble objects
+#' @examples
+#' new_gglist(list(NULL, ggplot2::ggplot(data = data.frame())))
+#' @export
 new_gglist <- function(x = list()) {
   if (!inherits(x, "list")) {
     stop("`x` must be a list")
@@ -91,12 +99,10 @@ vec_arith.gglist.gg <- function(op, x, y, ...) {
 }
 #' @export
 #' @method vec_arith.gglist labels
-vec_arith.gglist.labels <- function(op, x, y, ...) {
-  stopifnot(op == "+")
-  new_gglist(
-    lapply(FUN = "+", X = x, y, ...)
-  )
-}
+vec_arith.gglist.labels <- vec_arith.gglist.gg
+#' @export
+#' @method vec_arith.gglist guides
+vec_arith.gglist.guides <- vec_arith.gglist.gg
 
 #' @importFrom knitr knit_print
 #' @export

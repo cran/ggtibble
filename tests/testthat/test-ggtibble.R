@@ -46,6 +46,10 @@ test_that("ggtibble", {
   expect_named(v4$figure[[1]]$labels, "x")
   expect_equal(
     v4$figure[[1]]$labels$x,
+    "A is 1"
+  )
+  expect_equal(
+    v4$figure[[2]]$labels$x,
     "A is 2"
   )
   expect_equal(v4$caption, rep("", 2))
@@ -61,10 +65,35 @@ test_that("ggtibble", {
     regexp = "Unary operations are not defined for ggtibble objects",
     fixed = TRUE
   )
-  v5 <- v4 + ggplot2::geom_point()
+  v5 <-
+    ggtibble(
+      data.frame(A = 1:2, B = 3:4),
+      ggplot2::aes(x = B, y = B),
+      outercols = "A",
+      labs = list(x = "A is {A}")
+    ) +
+    ggplot2::geom_point()
   expect_equal(nrow(v5), 2)
   expect_equal(v4$figure[[1]]$layers, list())
   expect_s3_class(v5$figure[[1]]$layers[[1]]$geom, "GeomPoint")
+
+  # NULL labels work (#6)
+  v6 <-
+    ggtibble(
+      data.frame(A = 1:2, B = 3:4),
+      ggplot2::aes(x = B, y = B),
+      outercols = "A",
+      labs = list(x = "A is {A}", y = NULL)
+    ) +
+    ggplot2::geom_point()
+  expect_equal(
+    v6$figure[[1]]$labels$x,
+    "A is 1"
+  )
+  expect_equal(
+    v6$figure[[1]]$labels$y,
+    character(0)
+  )
 })
 
 test_that("knit_print.ggtibble", {
@@ -117,4 +146,30 @@ test_that("knit_print.ggtibble", {
   expect_equal(file.exists(found_files), rep(TRUE, 2))
 
   withr::deferred_clear()
+})
+
+test_that("labels are not always the same (#3)", {
+  d_plot <-
+    data.frame(
+      A = c("A", "B"),
+      B = c("C", "D"),
+      x = 1,
+      y = 1
+    )
+
+  p <-
+    ggtibble(d_plot, ggplot2::aes(x = x, y = y), outercols = c("A", "B"), labs = list(x = "{A} {B}")) +
+    ggplot2::geom_point()
+
+  fig1 <- p$figure[[1]]
+  fig2 <- p$figure[[2]]
+
+  expect_true(fig1$labels$x != fig2$labels$x)
+})
+
+test_that("new_ggtibble() works", {
+  expect_s3_class(
+    new_ggtibble(tibble::tibble(figure = list(ggplot2::ggplot()), caption = "")),
+    "ggtibble"
+  )
 })

@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -401,36 +401,35 @@ etc.</li>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;ggplot2&#39; was built under R version 4.3.1</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>d_plot <span class="ot">&lt;-</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  mtcars <span class="sc">|&gt;</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>    <span class="at">dispu =</span> <span class="st">&quot;cu. in.&quot;</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>  )</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  <span class="fu">ggtibble</span>(</span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>    d_plot,</span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> hp),</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>    <span class="at">outercols =</span> <span class="fu">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;dispu&quot;</span>),</span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Horsepower by displacement for {cyl} cars&quot;</span>,</span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>    <span class="at">labs =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="st">&quot;Displacement ({dispu})&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Gross horsepower&quot;</span>)</span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="co"># The result is a tibble with columns for the `data_plot`, `figure`, and</span></span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="co"># `caption`</span></span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="fu">as_tibble</span>(all_plots)</span>
-<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 5</span></span>
-<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="co">#&gt;     cyl dispu   data_plot                   figure caption                      </span></span>
-<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;                    &lt;gglist&gt; &lt;glue&gt;                       </span></span>
-<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="co">#&gt; 1     6 cu. in. &lt;tibble [7 × 10]&gt;  A ggplot object Horsepower by displacement f…</span></span>
-<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="co">#&gt; 2     4 cu. in. &lt;tibble [11 × 10]&gt; A ggplot object Horsepower by displacement f…</span></span>
-<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a><span class="co">#&gt; 3     8 cu. in. &lt;tibble [14 × 10]&gt; A ggplot object Horsepower by displacement f…</span></span>
-<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="co"># You can then show all the figures with the `knit_print()` method.</span></span>
-<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a><span class="fu">knit_print</span>(all_plots)</span></code></pre></div>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>d_plot <span class="ot">&lt;-</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  mtcars <span class="sc">|&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>    <span class="at">dispu =</span> <span class="st">&quot;cu. in.&quot;</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>  )</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="fu">ggtibble</span>(</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>    d_plot,</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> hp),</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>    <span class="at">outercols =</span> <span class="fu">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;dispu&quot;</span>),</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Horsepower by displacement for {cyl} cars&quot;</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>    <span class="at">labs =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="st">&quot;Displacement ({dispu})&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Gross horsepower&quot;</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="co"># The result is a tibble with columns for the `data_plot`, `figure`, and</span></span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="co"># `caption`</span></span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="fu">as_tibble</span>(all_plots)</span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 5</span></span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="co">#&gt;     cyl dispu   data_plot                   figure caption                      </span></span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;                    &lt;gglist&gt; &lt;glue&gt;                       </span></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="co">#&gt; 1     6 cu. in. &lt;tibble [7 × 10]&gt;  A ggplot object Horsepower by displacement f…</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="co">#&gt; 2     4 cu. in. &lt;tibble [11 × 10]&gt; A ggplot object Horsepower by displacement f…</span></span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="co">#&gt; 3     8 cu. in. &lt;tibble [14 × 10]&gt; A ggplot object Horsepower by displacement f…</span></span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a><span class="co"># You can then show all the figures with the `knit_print()` method.</span></span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="fu">knit_print</span>(all_plots)</span></code></pre></div>
 <div class="float">
 <img src="data:image/png;base64,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" alt="Horsepower by displacement for 6 cars" />
 <div class="figcaption">Horsepower by displacement for 6 cars</div>
