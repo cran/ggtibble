@@ -4,7 +4,7 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/humanpred/ggtibble/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/humanpred/ggtibble/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/ggtibble)](https://CRAN.R-project.org/package=ggtibble)
-[![Codecov test coverage](https://codecov.io/gh/humanpred/ggtibble/branch/main/graph/badge.svg)](https://app.codecov.io/gh/humanpred/ggtibble?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/humanpred/ggtibble/graph/badge.svg)](https://app.codecov.io/gh/humanpred/ggtibble)
 <!-- badges: end -->
 
 The goal of `ggtibble` is to allow creation of similarly-formatted figures as
@@ -47,3 +47,12 @@ all_plots <-
   ggplot2::geom_line()
 knit_print(all_plots)
 ```
+
+In an R Markdown or Quarto report, the `ggtibble` chunk option is a one-line
+shorthand for the above: it auto-derives the chunk label, sets `fig.cap` from
+the object's caption, and runs `knit_print()` automatically.
+
+````
+```{r ggtibble="all_plots"}
+```
+````

@@ -1,3 +1,27 @@
+# ggtibble 1.0.3
+
+* `knit_print.gglist()` automatically inserts `\FloatBarrier` between
+  figures when more than 10 plots are rendered to LaTeX, avoiding the
+  LaTeX "Output loop---100 consecutive dead cycles" error.  The
+  threshold is configurable via the new `float_barrier_after` argument
+  (default `10`; use `Inf` to disable).  Requires `\usepackage{placeins}`
+  in the document preamble. (#27)
+* New exported S3 generic `as_gglist()` (methods for `gg`, `list`, `gglist`,
+  `labels`, and `NULL`) that promotes an input to a `gglist`.  When the input
+  uses `ggforce::facet_wrap_paginate()` or `ggforce::facet_grid_paginate()`,
+  `as_gglist()` expands the paginated plot into one element per rendered
+  page so it can be passed to `print()`, `knit_print()`, or `ggsave()` and
+  every page will render.  Page expansion is opt-in — render methods are
+  unchanged and do not call `as_gglist()` implicitly.  `ggforce` is added to
+  Suggests (issue 2).
+* New `ggtibble` knitr chunk option that simplifies rendering a `ggtibble` in
+  R Markdown and Quarto reports.  Setting `ggtibble = "my_obj"` (or
+  `ggtibble = my_obj`) on a chunk auto-sets the chunk label, `fig.cap`, and
+  injects `knit_print(my_obj)` for empty chunk bodies.  Under Quarto, the
+  label is prefixed with `fig-` and multi-caption objects use `fig.subcap` so
+  `@fig-...` cross-references work (issue 17).
+* Works with the `ggbreak` package
+
 # ggtibble 1.0.2
 
 * `ggtibble()` now warns if `outercols` are not used in either the `caption` or

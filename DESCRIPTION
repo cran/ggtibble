@@ -1,6 +1,6 @@
 Package: ggtibble
 Title: Create Tibbles and Lists of 'ggplot' Figures for Reporting
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: 
     person("Bill", "Denney", email="wdenney@humanpredictions.com", role=c("aut", "cre"), comment=c(ORCID="0000-0002-5759-428X"))
 Description: 
@@ -10,9 +10,9 @@ Description:
   formatting.
 License: GPL (>= 3)
 Encoding: UTF-8
-RoxygenNote: 7.3.2
 Depends: R (>= 4.3)
-Suggests: rmarkdown, spelling, testthat (>= 3.0.0), withr
+Suggests: ggbreak, ggforce, quarto, rmarkdown, spelling, testthat (>=
+        3.0.0), withr
 Config/testthat/edition: 3
 Imports: checkmate, dplyr, ggplot2, glue, knitr, purrr, rlang, tibble,
         tidyr, vctrs
@@ -21,9 +21,10 @@ URL: https://humanpred.github.io/ggtibble/,
 BugReports: https://github.com/humanpred/ggtibble/issues
 Language: en-US
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0
 NeedsCompilation: no
-Packaged: 2025-06-11 17:54:41 UTC; bill
+Packaged: 2026-05-14 20:23:27 UTC; bill
 Author: Bill Denney [aut, cre] (ORCID: <https://orcid.org/0000-0002-5759-428X>)
 Maintainer: Bill Denney <wdenney@humanpredictions.com>
 Repository: CRAN
-Date/Publication: 2025-06-11 18:10:02 UTC
+Date/Publication: 2026-05-14 20:50:10 UTC

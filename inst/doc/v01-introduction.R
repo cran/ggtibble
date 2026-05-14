@@ -38,3 +38,6 @@ as_tibble(all_plots)
 # You can then show all the figures with the `knit_print()` method.
 knit_print(all_plots)
 
+## ----ggtibble="all_plots"-----------------------------------------------------
+knitr::knit_print(getFromNamespace(".ggtibble_chunk_cache", "ggtibble")[["all_plots"]])
+

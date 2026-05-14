@@ -48,8 +48,9 @@ overflow: visible;
 }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,7 +61,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -401,40 +402,41 @@ etc.</li>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; Attaching package: &#39;ggplot2&#39;</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from &#39;package:ggtibble&#39;:</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt;     %+%, ggsave</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>d_plot <span class="ot">&lt;-</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  mtcars <span class="sc">|&gt;</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>    <span class="at">dispu =</span> <span class="st">&quot;cu. in.&quot;</span></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>  )</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span></span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>  <span class="fu">ggtibble</span>(</span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>    d_plot,</span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> hp),</span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>    <span class="at">outercols =</span> <span class="fu">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;dispu&quot;</span>),</span>
-<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Horsepower by displacement for {cyl} cars&quot;</span>,</span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>    <span class="at">labs =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="st">&quot;Displacement ({dispu})&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Gross horsepower&quot;</span>)</span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
-<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="co"># The result is a tibble with columns for the `data_plot`, `figure`, and</span></span>
-<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="co"># `caption`</span></span>
-<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="fu">as_tibble</span>(all_plots)</span>
-<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 5</span></span>
-<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a><span class="co">#&gt;     cyl dispu   data_plot                   figure caption                      </span></span>
-<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;                    &lt;gglist&gt; &lt;glue&gt;                       </span></span>
-<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="co">#&gt; 1     6 cu. in. &lt;tibble [7 × 10]&gt;  A ggplot object Horsepower by displacement f…</span></span>
-<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a><span class="co">#&gt; 2     4 cu. in. &lt;tibble [11 × 10]&gt; A ggplot object Horsepower by displacement f…</span></span>
-<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a><span class="co">#&gt; 3     8 cu. in. &lt;tibble [14 × 10]&gt; A ggplot object Horsepower by displacement f…</span></span>
-<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a><span class="co"># You can then show all the figures with the `knit_print()` method.</span></span>
-<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="fu">knit_print</span>(all_plots)</span></code></pre></div>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;ggplot2&#39; was built under R version 4.5.3</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; Attaching package: &#39;ggplot2&#39;</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from &#39;package:ggtibble&#39;:</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt;     %+%, ggsave</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>d_plot <span class="ot">&lt;-</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  mtcars <span class="sc">|&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>    <span class="at">dispu =</span> <span class="st">&quot;cu. in.&quot;</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  )</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>all_plots <span class="ot">&lt;-</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>  <span class="fu">ggtibble</span>(</span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>    d_plot,</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> hp),</span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>    <span class="at">outercols =</span> <span class="fu">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;dispu&quot;</span>),</span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Horsepower by displacement for {cyl} cars&quot;</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>    <span class="at">labs =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="st">&quot;Displacement ({dispu})&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Gross horsepower&quot;</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="co"># The result is a tibble with columns for the `data_plot`, `figure`, and</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="co"># `caption`</span></span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="fu">as_tibble</span>(all_plots)</span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 5</span></span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a><span class="co">#&gt;     cyl dispu   data_plot                   figure caption                      </span></span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;                    &lt;gglist&gt; &lt;glue&gt;                       </span></span>
+<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a><span class="co">#&gt; 1     6 cu. in. &lt;tibble [7 × 10]&gt;  A ggplot object Horsepower by displacement f…</span></span>
+<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a><span class="co">#&gt; 2     4 cu. in. &lt;tibble [11 × 10]&gt; A ggplot object Horsepower by displacement f…</span></span>
+<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a><span class="co">#&gt; 3     8 cu. in. &lt;tibble [14 × 10]&gt; A ggplot object Horsepower by displacement f…</span></span>
+<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="co"># You can then show all the figures with the `knit_print()` method.</span></span>
+<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a><span class="fu">knit_print</span>(all_plots)</span></code></pre></div>
 <div class="float">
 <img role="img" aria-label="Horsepower by displacement for 6 cars" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAwFBMVEUAAAAAADoAAGYAOpAAZrYzMzM6AAA6ADo6AGY6kNtNTU1NTW5NTY5NbqtNjshmAABmADpmtrZmtv9uTU1uTW5uTY5ubo5ubqtuq+SOTU2OTW6OTY6Obk2ObquOyP+QOgCQkGaQtpCQ27aQ2/+rbk2rbm6rjk2ryKur5OSr5P+2ZgC22/+2///Ijk3I///bkDrb/7bb///kq27k///r6+v/tmb/yI7/25D/27b/29v/5Kv//7b//8j//9v//+T///+CzoT9AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAKzklEQVR4nO2dC3/TNhDA1dJ1JJSVhQ3KgHRbC4OsbVhx2q0vff9vNZ0kO7YePvkRJ5bufj8acjnJ0j96nBX5xDhJrbBtF2DXhQAhQoAQIUCIECBECBAi7QBlPDPF1gQZ9Zas7+sTICQZAUKSESAkGQFCkhEgJBkBQpIRICQZAUKS9QSIMbahAm4to14BMVYQIkAEiACVVf0AojEIA5Qx9EoD1WtXAWXUgggQAXKpCBCSjAAhyQgQkowAIcl6A5SRJ02ACJBDRYCQZN0AlSXyH6+pBXlUBAhJ1h8gTYgAESACVFYRICQZAUKSESAkGQFCkvUISBEiQASIAJVVBAhJRoCQZAQISUaAkGR9ApKECBABIkBlFQFCkhEgJBkBQpIRICQZAUKS9QoICBEgAkSAyqogQHe/XnH+dD598ZXzh3fTl98JUEVupkcC0OWc37z8/nQ+59c/EaCyXL74S7Sgh/dX8AZeZINKGdDj6czuYndvP0MXu3v7nT/8Jroa/0GIyTLiLTDlqt0fuwC9ngMd0cs0IBALPEuiBfHls39sQKrprFtQwoDuj+XzX2z/ogTo4aMkUz8GJQLIEknkUnaxp/OTmlksaUDCATq6QvygZAAtGZuZA5FLUgW0ePbtePZ4ekCAfIP0DGb6VTFIhwPKGAEiQOAHfQNGE4xPsoD4CtwgnE+6gEIlUUDCk545aBCgQh5PK3caBMgEpCm1mcXWIRi2VK+hAK1aDtJpABJdLKB/pQvIWjAjQGYXW7CAO9WUAXF+exgy1ScMCJoRzWKZB5BoPmH3Gq4r2YSiAyQ86YApPmFA4ZIsoGXru/k0AC1heG63HpQEIO0otlpRJEAEiHfsYrYnFB+g4EHaKXFu8egxnnQKLYgAZQFdrN3NahKAaJBeq1yAuk3zBAgDZBGKDhBf7Z116GLxA8q34OG/jSUKKFwIEAFyA2q9BS8RQO234KUBqMsOM6lhrisNVC8CNFRGdV2swxa8NAB12IKXCKBQIUAEyAlIjtLttuClAWhxAEtCy7Z+kEkoOkD3yktsP80nAAjmeAIk/zoAPZ5OYEVoQV0s84xBt4fsQNyQtb1ZjR9QsCQKyHpungD1uA04BUDO5+Y5hDeZYw/15tkyWzVQvYZpQdUVexXchPPr6ZzXBzfJ0gBkiApuItrRmw9zJLhJliSgPH7Qpy/ncyS4SSHxbYGp3R8kAV2fQPdCgpsk0oLMzQs6uMlTpQUlDMj6bR4AXU9BTmgM8gHiappHgpsUV2K2aph6ba2L8UZ+UOSAOu20Vy+RAwoVAkSAnID082LtVxQjBxSybSFpQN2XO7IKoegAdV8wy+IGFPJ7RrqAwndwJgqokRAgAkSAkGQbA1QiRICcVyJACQPquoFKSsyAOm+gAokYUPcNVCBxA+q4gQokYkDdN1BJYbZqgHoNMgZ13kAlJWJAwUKACJATUC9+UMyAevGDIgYU7gfVSlxbYPr3g9ZNKLoW1JMfFC+gnvygiAEFCwEiQG5A3be/gMQLqFuApUKiBdQ1flAhbAv1IkBDZTRAF4sXUE+DdMSAQiVRQL3sDwKJFVAvO8xAYgVkPVDXFpAmFB0g6yBaArShQZoAEaD+AYmuO3ZAMIktRD0CdpM3ByQHt3EDuj2cyN81Qib7JAHJpWj4EzDZo1dipmr8gFTDAUDd7+YdgOQYxEKOlthtQCAbAiQ1FqLxAHo8ze/iN9LFCo2BaDyA1GIQD7sjazEGrY0qiEYEiC8gHrmYzNbTvHyo9+71dBr+UK+WOkAVRGMCpB44lJSUyOAmEE3g7pevgcFNcqkHVEI0KkCGqOAmN0Dlch4YWCAXE5C9AMJ8tyPjAVQ8Nw+tKDC4SSGs9q3SjWIbSAggiLoQGNykEFZReTqU03UcXwt6eHfCQ4ObFBIEqM9DxrcH6O71HCg1G4NCAYU51zsNSPEJDm6SSwVQ7aa8AOd6pwGp8Djzhn5QA0ABzvXOAvJKv4BQ5zpGQFlp/TDk6Y1a55oASatuu2biB1TjXEcOqMFz0IwFGIVqYgTkca4JUCVhX67jWAA1ncEdhyJHCShjrQFZjYgAWaoqoqgBNa5pznVbQUDGAqiMiAB5VDmimAE1v1GvqJj9A1u7jBonGwkghShOQHI5tcV87XCuCRCWUyvXMSFA7VzHMQBqs9zsMeo8mDVMNjpAzZdlUwPUeFl2BIB6H1sbLcvuPKCNTD4NlmV3HhDbzOwcvCzbAlBpM/fmAal9rc2LjBttbLtseStuN0AhIq+2sbw3lK1d5DG2IND0vl22CBY9+jEo1/S4Xbb4KgcdgzrOIkH16iEju53HAwj5RSlktHf8xhQVoNplWcyh8vgLcQGqW5atu2fBtyFHA8i/LOsb28OGrogA+ZZl3Z5H6PWjAuRelrW95CbXjwxQ/Z6HouWkDMi3XbbSrdIGZDvX1piTOiCJSENxOoEEaH3T2fX6cQPq4foECLl+tICyutsIAtRfMgKEJCNASDIChCQjQEgyAoQkI0BIMgKEJOsGiAeEFggz2r2MDCMChBgRIMSIACFGowgwsk0hQIgQIEQIECIECJGGgIqQS2bYN8vo6Xz64qvfKI8fd3TltalGl3MbaRtXIDrLqL7Y2sgqdjNAMuybkGuRVzXsm2V0OYeoVT6jIn7ctdemGl3ObaRtnIHoTKP6YudGVrEbAVJh3wTtNx/mRsgl0wg+5WZcJsNGRrV6f+WxqUaXcxtpG2cgOtOovtilLKrFbtPFnj59EYSrQbtMo7u3n6Gteo3ARrcgf0al6HJ+I62ttZFqrNgqC7PYbQBdn0ATrIZ9M40gcJW4jNdIZqR6uj+jUnQ5rxHYcFcgOssIKzYY2cVuAUhk8BTQguq/eGkj+vzN0ZXXphxdzmckbZyB6BwZ1Rbbc7UWgFTQrhPfGKS7z0d5Ca8RKPX35LOpRJfzGOkIa65AdKYRUmydhVXs9tN8NeybZXQ5V9+Zx6jUgjw21ehybqMKH1+J9Kf1xc6NrGJvzA8Sn9b4OMrmZlrjKxnR5ZxG2sYZiM7KqLbYpSyqxSZPGhEChAgBQoQAIUKAECFAiGwa0OOp3PIFcfJvfzwzP3WowuTfv4v8vUcUGJnfv2p1rc0Dmsi/7qMo2gJap1sGnESkZRV6vFxFhgHkO4uiM6AmzSL8CMeyDAQIvmmolTx4YSb++ztj4gstVBPVGQ+4et2/EB/9IT6YwKczQzkDpc4WWoVOKamVkIv/anutaNWEhgIkCicLDHU4FDXcv3g8lcxk21qqt/B/eIV63x6K6iyBov5wrdy/yDHI3POULkDavlA0r8BggGStbp+rsgpG+hs++w++1Zwd1ycLifoqE21XVa6NJd38jRPQrNwfg08BLcmwLQgOeCsmNKgwvK7kcSf5kUtLtVF+sq6u+GMqK4DylM4uVlatjy9qIEMBWhzogt4fM91FFKD7472zopHw9dFLVUCGMj5AxRjBS13lOYCSI+dqb93F9swOA0aGMriLVVQ73MWkH5Q3Ezk2FIM01P32cO8M3qp/wjQHlv8xlUVVF3qQVgP1RLzu+QHt6CDN8hPIoXxqvFHTvJ6ZxbC096ecvtbTvOp1pUZhKhf6qMpVaZqXDsPPr87ynlQCpFTBBxGXZTv3Yq1vMUwZv6Polt4Ajf9Wwy39AQpvFjt6szp6IUCIECBECBAiBAgRAoQIAULkf+ij1XKPR1n3AAAAAElFTkSuQmCC" alt="Horsepower by displacement for 6 cars" />
 <div class="figcaption">Horsepower by displacement for 6 cars</div>
@@ -447,6 +449,41 @@ etc.</li>
 <img role="img" aria-label="Horsepower by displacement for 8 cars" src="data:image/png;base64,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" alt="Horsepower by displacement for 8 cars" />
 <div class="figcaption">Horsepower by displacement for 8 cars</div>
 </div>
+</div>
+<div id="shorter-syntax-via-the-ggtibble-chunk-option" class="section level1">
+<h1>Shorter syntax via the <code>ggtibble</code> chunk option</h1>
+<p>The <code>ggtibble</code> package registers a knitr
+<code>opts_hooks</code> callback that lets you render a
+<code>ggtibble</code> with a single chunk option. The chunk below is
+equivalent to the one above: the chunk label, <code>fig.cap</code>, and
+<code>knit_print()</code> call are all derived from the
+<code>ggtibble</code> option value.</p>
+<pre><code>
+``` r
+knitr::knit_print(getFromNamespace(&quot;.ggtibble_chunk_cache&quot;, &quot;ggtibble&quot;)[[&quot;all_plots&quot;]])
+```
+
+
+
+![Horsepower by displacement for 6 cars](C:/Users/bill/AppData/Local/Temp/Rtmp8cQwid/Rbuild4dd045927d6/ggtibble/vignettes/v01-introduction_files/figure-html/all_plots-1.png)
+
+
+
+
+
+![Horsepower by displacement for 4 cars](C:/Users/bill/AppData/Local/Temp/Rtmp8cQwid/Rbuild4dd045927d6/ggtibble/vignettes/v01-introduction_files/figure-html/all_plots-2.png)
+
+
+
+
+
+![Horsepower by displacement for 8 cars](C:/Users/bill/AppData/Local/Temp/Rtmp8cQwid/Rbuild4dd045927d6/ggtibble/vignettes/v01-introduction_files/figure-html/all_plots-3.png)</code></pre>
+<p>The option value is R code given as a character string and is
+evaluated in the knit environment, so
+<code>ggtibble = &quot;targets::tar_read(all_plots)&quot;</code> also works. This
+same syntax works in Quarto, where the auto-generated chunk label is
+prefixed with <code>fig-</code> so that <code>@fig-all_plots</code>
+cross-references resolve.</p>
 </div>
 
 
